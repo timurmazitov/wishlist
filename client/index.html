@@ -21,7 +21,7 @@
       <!-- Screen 1: Guest Selection -->
       <div id="screen-guest" class="screen pt-8">
         <h1 class="text-2xl font-bold text-center text-primary mb-2">Привет!</h1>
-        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Представься, пожалуйста</h2>
+        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Представьтесь, пожалуйста</h2>
         
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2" for="guest-select">Гость</label>
@@ -36,7 +36,8 @@
 
       <!-- Screen 2: Gift Selection -->
       <div id="screen-gifts" class="screen pt-4" style="display: none;">
-        <h2 class="text-xl font-bold text-primary mb-4">Выберите подарки, <span id="guest-name-display-gifts"></span></h2>
+        <h1 class="text-2xl font-bold text-center text-primary mb-2"><span id="guest-name-display-gifts"></span>,</h1>
+        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Выберите подарок из списка:</h2>
         <div id="gifts-list" class="space-y-3 mb-4"></div>
         <button id="btn-clear-all" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 rounded-lg text-base mb-4">
           Очистить всё
@@ -45,7 +46,8 @@
 
       <!-- Screen 3: Saved List -->
       <div id="screen-saved" class="screen pt-4" style="display: none;">
-        <h2 class="text-xl font-bold text-primary mb-4">Ваш список подарков, <span id="guest-name-display"></span></h2>
+        <h1 class="text-2xl font-bold text-center text-primary mb-2"><span id="guest-name-display"></span>,</h1>
+        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Ваш список подарков:</h2>
         <div id="saved-list" class="space-y-3 mb-4"></div>
         <div id="send-buttons" class="flex flex-col gap-3 mb-4">
           <div class="flex items-center gap-2">

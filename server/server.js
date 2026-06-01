@@ -22,7 +22,7 @@ app.use('/api/selections', selectionsRouter);
 app.get('/api/guests', (req, res) => {
   try {
     const db = getDb();
-    const guests = db.prepare('SELECT id, name, email, phone FROM guests ORDER BY id').all();
+    const guests = db.prepare('SELECT id, name, email, phone FROM guests ORDER BY name').all();
     res.json(guests);
   } catch (err) {
     console.error('Error fetching guests:', err);
