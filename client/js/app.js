@@ -413,8 +413,6 @@ async function init() {
     }
   });
 
-  $('#btn-clear-all').addEventListener('click', clearAllSelections);
-
   $('#btn-clear-footer').addEventListener('click', clearAllSelections);
 
   $('#btn-save').addEventListener('click', saveSelections);
