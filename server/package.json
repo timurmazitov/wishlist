@@ -5,11 +5,16 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build:css": "npx tailwindcss -i ../client/css/tailwind.css -o ../client/css/tailwind-output.css --minify",
+    "watch:css": "npx tailwindcss -i ../client/css/tailwind.css -o ../client/css/tailwind-output.css --watch"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "nodemailer": "^6.9.14"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }

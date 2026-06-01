@@ -1,10 +1,10 @@
 const express = require('express');
-const { getDb } = require('../database');
+const { getDb, query } = require('../database');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  try {
+  query(async () => {
     const db = getDb();
     const gifts = db.prepare('SELECT * FROM gifts ORDER BY id').all();
 
@@ -20,19 +20,20 @@ router.get('/', (req, res) => {
     });
 
     res.json(result);
-  } catch (err) {
+  }).catch((err) => {
     console.error('Error fetching gifts:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
 
 router.get('/:id', (req, res) => {
-  try {
+  query(async () => {
     const db = getDb();
     const gift = db.prepare('SELECT * FROM gifts WHERE id = ?').get(Number(req.params.id));
 
     if (!gift) {
-      return res.status(404).json({ error: 'Gift not found' });
+      res.status(404).json({ error: 'Gift not found' });
+      return;
     }
 
     const selections = db
@@ -44,10 +45,10 @@ router.get('/:id', (req, res) => {
       links: JSON.parse(gift.links || '[]'),
       selected_total: selections.total
     });
-  } catch (err) {
+  }).catch((err) => {
     console.error('Error fetching gift:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
 
 module.exports = router;

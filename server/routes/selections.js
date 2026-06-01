@@ -1,15 +1,16 @@
 const express = require('express');
-const { getDb } = require('../database');
+const { getDb, query } = require('../database');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  try {
+  query(async () => {
     const db = getDb();
     const guestId = Number(req.query.guest_id);
 
     if (!guestId) {
-      return res.status(400).json({ error: 'guest_id is required' });
+      res.status(400).json({ error: 'guest_id is required' });
+      return;
     }
 
     const selections = db
@@ -29,29 +30,36 @@ router.get('/', (req, res) => {
     }));
 
     res.json(result);
-  } catch (err) {
+  }).catch((err) => {
     console.error('Error fetching selections:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
 
 router.post('/', (req, res) => {
-  try {
+  query(async () => {
     const db = getDb();
     const { guest_id, gift_id, quantity } = req.body;
 
     if (!guest_id || !gift_id) {
-      return res.status(400).json({ error: 'guest_id and gift_id are required' });
+      res.status(400).json({ error: 'guest_id and gift_id are required' });
+      return;
     }
+
+    db.exec('BEGIN IMMEDIATE');
 
     const gift = db.prepare('SELECT * FROM gifts WHERE id = ?').get(Number(gift_id));
     if (!gift) {
-      return res.status(404).json({ error: 'Gift not found' });
+      db.exec('ROLLBACK');
+      res.status(404).json({ error: 'Gift not found' });
+      return;
     }
 
     const guest = db.prepare('SELECT * FROM guests WHERE id = ?').get(Number(guest_id));
     if (!guest) {
-      return res.status(404).json({ error: 'Guest not found' });
+      db.exec('ROLLBACK');
+      res.status(404).json({ error: 'Guest not found' });
+      return;
     }
 
     const qty = Number(quantity) || 1;
@@ -72,10 +80,12 @@ router.post('/', (req, res) => {
       const available = gift.total_needed - existingTotal.total - myCurrent.total;
 
       if (qty > available) {
-        return res.status(400).json({
+        db.exec('ROLLBACK');
+        res.status(400).json({
           error: `Доступно только ${available} шт.`,
           available
         });
+        return;
       }
     }
 
@@ -99,29 +109,31 @@ router.post('/', (req, res) => {
       }
     }
 
+    db.exec('COMMIT');
     res.json({ success: true });
-  } catch (err) {
+  }).catch((err) => {
     console.error('Error saving selection:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
 
 router.delete('/', (req, res) => {
-  try {
+  query(async () => {
     const db = getDb();
     const guestId = Number(req.query.guest_id);
 
     if (!guestId) {
-      return res.status(400).json({ error: 'guest_id is required' });
+      res.status(400).json({ error: 'guest_id is required' });
+      return;
     }
 
     db.prepare('DELETE FROM selections WHERE guest_id = ?').run(guestId);
 
     res.json({ success: true });
-  } catch (err) {
+  }).catch((err) => {
     console.error('Error clearing selections:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
 
 module.exports = router;

@@ -5,10 +5,15 @@ const DB_PATH = path.join(__dirname, '..', 'data', 'wishlist.db');
 
 let db;
 
+function query(fn) {
+  return Promise.resolve().then(() => fn());
+}
+
 function getDb() {
   if (!db) {
     db = new DatabaseSync(DB_PATH);
     db.exec('PRAGMA journal_mode = WAL');
+    db.exec('PRAGMA busy_timeout = 5000');
     db.exec('PRAGMA foreign_keys = ON');
   }
   return db;
@@ -139,4 +144,4 @@ function seedData(database) {
   }
 }
 
-module.exports = { getDb, initDb };
+module.exports = { getDb, initDb, query };
