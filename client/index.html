@@ -62,11 +62,11 @@
         <div id="saved-list" class="space-y-3 mb-4"></div>
         <div id="send-buttons" class="flex flex-col gap-3 mb-4">
           <div class="flex items-center gap-2">
-            <button data-action="restart" class="bg-danger hover:bg-danger-dark text-white px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
-              Начать заново
+            <button data-action="restart" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
+              В начало
             </button>
-            <button id="btn-back" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 rounded-lg text-base">
-              Назад к редактированию
+            <button id="btn-back" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed">
+              Редактировать
             </button>
           </div>
         </div>
@@ -79,8 +79,11 @@
           Выбрано: <span id="selected-count">0</span> шт, на сумму ~ <span id="selected-total">0</span> ₽
         </div>
         <div class="flex items-center gap-2">
-          <button data-action="restart" class="bg-danger hover:bg-danger-dark text-white px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
-            Начать заново
+          <button data-action="restart" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
+            В начало
+          </button>
+          <button id="btn-clear-footer"  class="bg-danger hover:bg-danger-dark text-white px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
+            Очистить
           </button>
           <button id="btn-save" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed" disabled>
             Сохранить

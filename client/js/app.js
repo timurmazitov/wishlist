@@ -325,7 +325,7 @@ async function saveSelections() {
     });
 
     for (const [giftId, quantity] of entries) {
-      await fetch(`${API_BASE}/selections`, {
+      const res = await fetch(`${API_BASE}/selections`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -334,12 +334,20 @@ async function saveSelections() {
           quantity
         })
       });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || 'Не удалось сохранить');
+        await gotoGiftsScreen();
+        return;
+      }
     }
+
     delete state.initialDbCounts;
     state.selections = {};
     await gotoSavedScreen();
   } catch (err) {
     console.error('Failed to save selections:', err);
+    await gotoGiftsScreen();
   }
 }
 
@@ -406,6 +414,8 @@ async function init() {
   });
 
   $('#btn-clear-all').addEventListener('click', clearAllSelections);
+
+  $('#btn-clear-footer').addEventListener('click', clearAllSelections);
 
   $('#btn-save').addEventListener('click', saveSelections);
 
