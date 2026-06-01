@@ -5,6 +5,7 @@ const COOKIE_DAYS = 30;
 
 const state = {
   guestId: null,
+  guestName: null,
   gifts: [],
   selections: {},
   savedSelections: []
@@ -274,6 +275,7 @@ function renderSavedList() {
 
 async function gotoGuestScreen() {
   state.guestId = null;
+  state.guestName = null;
   state.selections = {};
   state.savedSelections = [];
   delete state.initialDbCounts;
@@ -302,6 +304,10 @@ async function gotoGiftsScreen() {
 }
 
 async function gotoSavedScreen() {
+  if (state.guestId) {
+    setCookie(COOKIE_GUEST_ID, state.guestId, COOKIE_DAYS);
+  }
+  $('#guest-name-display').textContent = state.guestName || '';
   showScreen('saved');
   await loadSavedSelections();
 }
@@ -363,8 +369,25 @@ async function sendEmail() {
 
 async function init() {
   $('#btn-select-guest').addEventListener('click', async () => {
-    state.guestId = Number($('#guest-select').value);
+    const select = $('#guest-select');
+    state.guestId = Number(select.value);
+    state.guestName = select.options[select.selectedIndex].text;
     if (!state.guestId) return;
+
+    try {
+      const selRes = await fetch(`${API_BASE}/selections?guest_id=${state.guestId}`);
+      if (selRes.ok) {
+        const selections = await selRes.json();
+        if (selections.length > 0) {
+          state.savedSelections = selections;
+          await gotoSavedScreen();
+          return;
+        }
+      }
+    } catch (err) {
+      console.error('Error checking saved selections:', err);
+    }
+
     await gotoGiftsScreen();
   });
 
@@ -375,15 +398,6 @@ async function init() {
   document.addEventListener('click', async (e) => {
     const restartBtn = e.target.closest('[data-action="restart"]');
     if (restartBtn) {
-      if (state.guestId) {
-        try {
-          await fetch(`${API_BASE}/selections?guest_id=${state.guestId}`, {
-            method: 'DELETE'
-          });
-        } catch (err) {
-          console.error('Failed to clear selections:', err);
-        }
-      }
       await gotoGuestScreen();
     }
   });
@@ -406,6 +420,17 @@ async function init() {
   const savedGuestId = getCookie(COOKIE_GUEST_ID);
   if (savedGuestId) {
     state.guestId = Number(savedGuestId);
+
+    try {
+      const guestsRes = await fetch(`${API_BASE}/guests`);
+      if (guestsRes.ok) {
+        const guests = await guestsRes.json();
+        const guest = guests.find((g) => g.id === state.guestId);
+        if (guest) state.guestName = guest.name;
+      }
+    } catch (err) {
+      console.error('Error fetching guest name:', err);
+    }
 
     try {
       const selRes = await fetch(`${API_BASE}/selections?guest_id=${state.guestId}`);
