@@ -49,7 +49,7 @@
 
       <!-- Screen 2: Gift Selection -->
       <div id="screen-gifts" class="screen pt-4" style="display: none;">
-        <h2 class="text-xl font-bold text-primary mb-4">Выберите подарки</h2>
+        <h2 class="text-xl font-bold text-primary mb-4">Выберите подарки, <span id="guest-name-display-gifts"></span></h2>
         <div id="gifts-list" class="space-y-3 mb-4"></div>
         <button id="btn-clear-all" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 rounded-lg text-base mb-4">
           Очистить всё
@@ -82,7 +82,7 @@
           <button data-action="restart" class="bg-danger hover:bg-danger-dark text-white px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
             Начать заново
           </button>
-          <button id="btn-save" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base">
+          <button id="btn-save" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed" disabled>
             Сохранить
           </button>
         </div>

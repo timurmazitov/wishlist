@@ -170,6 +170,7 @@ function updateSummary() {
 
   $('#selected-count').textContent = totalItems;
   $('#selected-total').textContent = totalPrice;
+  $('#btn-save').disabled = totalItems === 0;
 }
 
 function renderGiftsList() {
@@ -288,6 +289,8 @@ async function gotoGiftsScreen() {
   if (!state.guestId) return;
   setCookie(COOKIE_GUEST_ID, state.guestId, COOKIE_DAYS);
   await loadGifts();
+
+  $('#guest-name-display-gifts').textContent = state.guestName || '';
 
   const res = await fetch(`${API_BASE}/selections?guest_id=${state.guestId}`);
   const saved = await res.json();
