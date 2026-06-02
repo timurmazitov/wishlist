@@ -38,7 +38,7 @@ function showScreen(name) {
   const footer = $('#app-footer');
   const footerGifts = $('#footer-gifts');
 
-  if (name === 'welcome' || name === 'guest') {
+  if (name === 'welcome' || name === 'rules' || name === 'guest') {
     footer.style.display = 'none';
     footerGifts.style.display = 'none';
   } else if (name === 'gifts') {
@@ -400,7 +400,11 @@ async function sendEmail() {
 }
 
 async function init() {
-  $('#btn-start').addEventListener('click', async () => {
+  $('#btn-start').addEventListener('click', () => {
+    showScreen('rules');
+  });
+
+  $('#btn-agree').addEventListener('click', async () => {
     await gotoGuestScreen();
   });
 

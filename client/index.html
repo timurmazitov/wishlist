@@ -25,13 +25,37 @@
         </div>
 
         <h1 class="text-5xl font-bold text-center text-primary mb-2">ПОДАРИ</br>ТИМУРУ</br>ДЕРЕВО</h1>
-        <button id="btn-start" class="w-full max-w-xs bg-primary hover:bg-primary-dark text-white font-medium py-4 rounded-full text-base shadow-[0_4px_10px_rgba(107,142,107,0.3)]">
+        <button id="btn-start" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base">
           НАЧАТЬ
         </button>
       
       </div>
 
-      <!-- Screen 1: Guest Selection -->
+      <!-- Screen 1: Rules -->
+      <div id="screen-rules" class="screen flex-1 flex flex-col items-center justify-center px-4" style="display: none; gap: 4rem;">
+        <h1 class="text-2xl font-bold text-center text-primary">ЗАПОМНИ ПРАВИЛА:</h1>
+
+        <ol class="w-full space-y-6 mb-2">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm mt-0.5">1</span>
+            <span class="text-gray-800 text-base leading-relaxed">Покупай <span class="text-primary font-bold">ТОЛЬКО</span> деревья, доступные из списка далее.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm mt-0.5">2</span>
+            <span class="text-gray-800 text-base leading-relaxed">Выбирай <span class="text-primary font-bold">ОБЯЗАТЕЛЬНО</span> саженцы с закрытой корневой системой. В "горшочках".</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm mt-0.5">3</span>
+            <span class="text-gray-800 text-base leading-relaxed">Бери 1 <span class="text-primary font-bold">БОЛЬШОЕ</span> дерево вместо 3х маленьких.</span>
+          </li>
+        </ol>
+
+        <button id="btn-agree" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base">
+          СОГЛАСЕН
+        </button>
+      </div>
+
+      <!-- Screen 2: Guest Selection -->
       <div id="screen-guest" class="screen flex-1 flex flex-col justify-center" style="display: none;">
         <h1 class="text-2xl font-bold text-center text-primary mb-2">ВЫБЕРИ СЕБЯ:</h1>
         
