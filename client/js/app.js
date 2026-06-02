@@ -288,6 +288,7 @@ async function gotoGuestScreen() {
   delete state.initialDbCounts;
   deleteCookie(COOKIE_GUEST_ID);
   showScreen('guest');
+  $('#btn-select-guest').disabled = true;
   await loadGuests();
 }
 
