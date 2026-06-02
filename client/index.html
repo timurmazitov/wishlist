@@ -32,11 +32,11 @@
       </div>
 
       <!-- Screen 1: Guest Selection -->
-      <div id="screen-guest" class="screen pt-8" style="display: none;">
+      <div id="screen-guest" class="screen flex-1 flex flex-col justify-center" style="display: none;">
         <h1 class="text-2xl font-bold text-center text-primary mb-2">ВЫБЕРИ СЕБЯ:</h1>
         
         <div class="mb-6">
-          <ul id="guest-list" class="w-full border border-sage-200 rounded-lg divide-y divide-sage-100 overflow-hidden"></ul>
+          <ul id="guest-list" class="w-full border border-sage-200 rounded-lg divide-y divide-sage-100 h-[calc((min(480px,100vw)-70px)*705/658+123px)] overflow-y-auto"></ul>
         </div>
         <button id="btn-select-guest" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed" disabled>
           К ПОДАРКАМ
