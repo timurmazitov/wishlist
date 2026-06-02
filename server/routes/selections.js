@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
          FROM selections s
          JOIN gifts g ON s.gift_id = g.id
          WHERE s.guest_id = ?
-         ORDER BY s.created_at`
+          ORDER BY g.name COLLATE NOCASE`
       )
       .all(guestId);
 

@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   query(async () => {
     const db = getDb();
-    const gifts = db.prepare('SELECT * FROM gifts ORDER BY id').all();
+    const gifts = db.prepare('SELECT * FROM gifts ORDER BY name COLLATE NOCASE').all();
 
     const result = gifts.map((gift) => {
       const selections = db
