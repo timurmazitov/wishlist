@@ -20,7 +20,7 @@ body {
 #app-footer {
   position: sticky;
   bottom: 0;
-  background: white;
+  background: #fbfaf8;
   z-index: 10;
 }
 
@@ -39,7 +39,7 @@ body {
   height: 160px;
   object-fit: cover;
   border-radius: 12px 12px 0 0;
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  background: linear-gradient(135deg, #e6edec, #c5d9c5);
 }
 
 .btn-quantity {
@@ -73,22 +73,22 @@ body {
 .modal-link {
   display: block;
   padding: 8px 12px;
-  background: #f3f4f6;
+  background: #f0f3f0;
   border-radius: 8px;
   margin-bottom: 4px;
   font-size: 13px;
-  color: #6366f1;
+  color: #6B8E6B;
   text-decoration: none;
   transition: background-color 0.15s ease;
 }
 
 .modal-link:active {
-  background: #e5e7eb;
+  background: #e6ede6;
 }
 
 select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%236b7280'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23a8bda8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 8px center;
   background-size: 24px;

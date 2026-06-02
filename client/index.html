@@ -13,19 +13,31 @@
   <link rel="stylesheet" href="css/tailwind-output.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50 font-['Roboto'] min-h-screen">
+<body class="bg-warm-50 font-['Roboto'] min-h-screen">
 
   <div id="app" class="max-w-[480px] mx-auto min-h-screen flex flex-col">
 
     <main class="flex-1 px-4">
+      <!-- Screen 0: Welcome -->
+      <div id="screen-welcome" class="screen absolute inset-x-0 flex flex-col items-center justify-center p-6">
+        <div class="tree-container">
+          <img src="/images/tree.png" alt="Дерево">
+        </div>
+
+        <h1 class="text-5xl font-bold text-center text-primary mb-2">ПОДАРИ</br>ТИМУРУ</br>ДЕРЕВО</h1>
+        <button id="btn-start" class="w-full max-w-xs bg-primary hover:bg-primary-dark text-white font-medium py-4 rounded-full text-base shadow-[0_4px_10px_rgba(107,142,107,0.3)]">
+          НАЧАТЬ
+        </button>
+      </div>
+
       <!-- Screen 1: Guest Selection -->
-      <div id="screen-guest" class="screen pt-8">
+      <div id="screen-guest" class="screen pt-8" style="display: none;">
         <h1 class="text-2xl font-bold text-center text-primary mb-2">Привет!</h1>
-        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Представьтесь, пожалуйста</h2>
+        <h2  class="text-2l font-bold text-sage-300 text-center mb-8">Представьтесь, пожалуйста</h2>
         
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2" for="guest-select">Гость</label>
-          <select id="guest-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white focus:ring-2 focus:ring-primary focus:border-primary">
+          <select id="guest-select" class="w-full px-4 py-3 border border-sage-200 rounded-lg text-base bg-white focus:ring-2 focus:ring-primary focus:border-primary">
             <option value="">Выберите гостя...</option>
           </select>
         </div>
@@ -37,18 +49,18 @@
       <!-- Screen 2: Gift Selection -->
       <div id="screen-gifts" class="screen pt-4" style="display: none;">
         <h1 class="text-2xl font-bold text-center text-primary mb-2"><span id="guest-name-display-gifts"></span>,</h1>
-        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Выберите подарок из списка:</h2>
+        <h2  class="text-2l font-bold text-sage-300 text-center mb-8">Выберите подарок из списка:</h2>
         <div id="gifts-list" class="space-y-3 mb-4"></div>
       </div>
 
       <!-- Screen 3: Saved List -->
       <div id="screen-saved" class="screen pt-4" style="display: none;">
         <h1 class="text-2xl font-bold text-center text-primary mb-2"><span id="guest-name-display"></span>,</h1>
-        <h2  class="text-2l font-bold text-gray-500 text-center mb-8">Ваш список подарков:</h2>
+        <h2  class="text-2l font-bold text-sage-300 text-center mb-8">Ваш список подарков:</h2>
         <div id="saved-list" class="space-y-3 mb-4"></div>
         <div id="send-buttons" class="flex flex-col gap-3 mb-4">
           <div class="flex items-center gap-2">
-            <button data-action="restart" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
+            <button data-action="restart" class="bg-warm-200 hover:bg-warm-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
               В начало
             </button>
             <button id="btn-back" class="flex-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed">
@@ -60,12 +72,12 @@
     </main>
 
     <footer id="app-footer" style="display: none;">
-      <div id="footer-gifts" style="display: none;" class="px-4 py-3 border-t border-gray-200 bg-white">
-        <div id="selection-summary" class="text-xl text-gray-600 text-center mb-3">
+      <div id="footer-gifts" style="display: none;" class="px-4 py-3 border-t border-sage-200 bg-warm-50 shadow-[0_-2px_4px_rgba(0,0,0,0.03)]">
+        <div id="selection-summary" class="text-xl text-sage-300 text-center mb-3">
           Выбрано: <span id="selected-count">0</span> шт, на сумму ~ <span id="selected-total">0</span> ₽
         </div>
         <div class="flex items-center gap-2">
-          <button data-action="restart" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
+          <button data-action="restart" class="bg-warm-200 hover:bg-warm-300 text-gray-700 px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
             В начало
           </button>
           <button id="btn-clear-footer"  class="bg-danger hover:bg-danger-dark text-white px-3 py-2 rounded-lg text-base font-medium whitespace-nowrap flex-shrink-0">
@@ -80,13 +92,13 @@
 
     <!-- Modal -->
     <div id="gift-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
-      <div id="modal-overlay" class="absolute inset-0 bg-black/50"></div>
-      <div class="relative bg-white rounded-2xl w-full max-w-[400px] max-h-[80vh] overflow-y-auto p-6 z-10">
-        <img id="modal-image" src="" alt="" class="w-full h-48 object-cover rounded-xl mb-4">
+      <div id="modal-overlay" class="absolute inset-0 bg-warm-50/70"></div>
+      <div class="relative bg-warm-50 rounded-2xl w-full max-w-[400px] max-h-[80vh] overflow-y-auto p-6 z-10 shadow-lg">
+        <img id="modal-image" src="" alt="" class="w-full h-48 object-cover rounded-xl mb-4 shadow-sm">
         <h3 id="modal-name" class="text-xl font-bold text-gray-900 mb-2"></h3>
-        <p id="modal-description" class="text-gray-600 text-sm mb-4"></p>
+        <p id="modal-description" class="text-sage-300 text-sm mb-4"></p>
         <div class="flex items-center gap-2 mb-4">
-          <span class="text-sm text-gray-500">Примерная стоимость:</span>
+          <span class="text-sm text-sage-300">Примерная стоимость:</span>
           <span id="modal-price" class="text-lg font-bold text-primary"></span>
         </div>
         <div id="modal-links" class="mb-4"></div>

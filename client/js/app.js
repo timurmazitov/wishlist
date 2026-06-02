@@ -60,8 +60,8 @@ function openGiftModal(gift) {
     ? gift.image_path
     : `data:image/svg+xml,${encodeURIComponent(
         `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
-           <rect fill="#c7d2fe" width="400" height="200"/>
-           <text x="200" y="100" text-anchor="middle" fill="#6366f1" font-size="16">🎁</text>
+           <rect fill="#e6edec" width="400" height="200"/>
+           <text x="200" y="100" text-anchor="middle" fill="#6B8E6B" font-size="16">🎁</text>
          </svg>`
       )}`;
 
@@ -102,14 +102,14 @@ function renderGiftCard(gift) {
     ? gift.image_path
     : `data:image/svg+xml,${encodeURIComponent(
         `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
-           <rect fill="#e0e7ff" width="400" height="200"/>
-           <text x="200" y="100" text-anchor="middle" fill="#6366f1" font-size="14">${gift.name}</text>
+           <rect fill="#e6edec" width="400" height="200"/>
+           <text x="200" y="100" text-anchor="middle" fill="#6B8E6B" font-size="14">${gift.name}</text>
          </svg>`
       )}`;
 
   const availabilityHtml = isLimited
     ? `<span class="gift-availability ${
-        remainingForMe <= 0 ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'
+        remainingForMe <= 0 ? 'bg-red-100 text-red-500' : 'bg-sage-100 text-primary'
       }">${remainingForMe <= 0 ? 'Разобрали' : `Доступно: ${remainingForMe} шт.`}</span>`
     : '';
 
@@ -125,7 +125,7 @@ function renderGiftCard(gift) {
           <span class="font-bold text-primary whitespace-nowrap">${gift.price} ₽</span>
         </div>
         <div class="flex items-center justify-center gap-3 mt-3">
-          <button class="btn-quantity bg-gray-100 text-gray-600 hover:bg-gray-200" data-action="decrease" data-gift-id="${gift.id}" ${count <= 0 ? 'disabled' : ''}>−</button>
+          <button class="btn-quantity bg-warm-200 text-gray-600 hover:bg-warm-300" data-action="decrease" data-gift-id="${gift.id}" ${count <= 0 ? 'disabled' : ''}>−</button>
           <span class="quantity-display">${count}</span>
           <button class="btn-quantity bg-primary text-white hover:bg-primary-dark" data-action="increase" data-gift-id="${gift.id}" ${(isLimited && count >= myMax) ? 'disabled' : ''}>+</button>
         </div>
@@ -258,15 +258,15 @@ function renderSavedList() {
           <div class="flex items-start justify-between gap-2">
             <div class="flex-1">
               <h3 class="font-medium text-gray-900">${s.gift_name}</h3>
-              <p class="text-sm text-gray-500">${s.price} ₽ × ${s.quantity} шт. = <span class="font-medium text-primary">${s.price * s.quantity} ₽</span></p>
+              <p class="text-sm text-sage-300">${s.price} ₽ × ${s.quantity} шт. = <span class="font-medium text-primary">${s.price * s.quantity} ₽</span></p>
             </div>
             <span class="bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-sm">${s.quantity}</span>
           </div>
         </div>`
         )
         .join('')}
-      <div class="bg-primary/5 rounded-xl p-4 text-center">
-        <span class="text-sm text-gray-600">Итого:</span>
+      <div class="bg-primary-pale rounded-xl p-4 text-center shadow-sm">
+        <span class="text-sm text-sage-300">Итого:</span>
         <span class="text-lg font-bold text-primary ml-2">${totalPrice} ₽</span>
       </div>
     </div>`;
@@ -379,6 +379,10 @@ async function sendEmail() {
 }
 
 async function init() {
+  $('#btn-start').addEventListener('click', async () => {
+    await gotoGuestScreen();
+  });
+
   $('#btn-select-guest').addEventListener('click', async () => {
     const select = $('#guest-select');
     state.guestId = Number(select.value);
@@ -460,8 +464,6 @@ async function init() {
     await gotoGiftsScreen();
     return;
   }
-
-  await gotoGuestScreen();
 }
 
 init();

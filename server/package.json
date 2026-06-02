@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build:css": "npx tailwindcss -i ../client/css/tailwind.css -o ../client/css/tailwind-output.css --minify",
-    "watch:css": "npx tailwindcss -i ../client/css/tailwind.css -o ../client/css/tailwind-output.css --watch"
+    "build:css": "cd .. && npx tailwindcss -c tailwind.config.js -i client/css/tailwind.css -o client/css/tailwind-output.css --minify",
+    "watch:css": "cd .. && npx tailwindcss -c tailwind.config.js -i client/css/tailwind.css -o client/css/tailwind-output.css --watch"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
