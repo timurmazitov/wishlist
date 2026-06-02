@@ -208,13 +208,15 @@ async function loadGuests() {
   try {
     const res = await fetch(`${API_BASE}/guests`);
     const guests = await res.json();
-    const select = $('#guest-select');
-    select.innerHTML = '<option value="">Выберите гостя...</option>';
+    const list = $('#guest-list');
+    list.innerHTML = '';
     guests.forEach((guest) => {
-      const option = document.createElement('option');
-      option.value = guest.id;
-      option.textContent = guest.name;
-      select.appendChild(option);
+      const li = document.createElement('li');
+      li.dataset.guestId = guest.id;
+      li.dataset.guestName = guest.name;
+      li.className = 'guest-list-item';
+      li.textContent = guest.name;
+      list.appendChild(li);
     });
   } catch (err) {
     console.error('Failed to load guests:', err);
@@ -384,9 +386,9 @@ async function init() {
   });
 
   $('#btn-select-guest').addEventListener('click', async () => {
-    const select = $('#guest-select');
-    state.guestId = Number(select.value);
-    state.guestName = select.options[select.selectedIndex].text;
+    const selected = $('#guest-list .selected');
+    state.guestId = Number(selected.dataset.guestId);
+    state.guestName = selected.dataset.guestName;
     if (!state.guestId) return;
 
     try {
@@ -406,8 +408,12 @@ async function init() {
     await gotoGiftsScreen();
   });
 
-  $('#guest-select').addEventListener('change', () => {
-    $('#btn-select-guest').disabled = !$('#guest-select').value;
+  $('#guest-list').addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    $$('#guest-list li').forEach((el) => el.classList.remove('selected'));
+    li.classList.add('selected');
+    $('#btn-select-guest').disabled = false;
   });
 
   document.addEventListener('click', async (e) => {
