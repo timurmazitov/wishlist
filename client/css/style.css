@@ -16,6 +16,10 @@ body {
 .screen {
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
 #app-footer {
   position: sticky;
   bottom: 0;
