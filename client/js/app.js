@@ -256,7 +256,7 @@ function renderSavedList() {
       ${state.savedSelections
         .map(
           (s) => `
-        <div class="bg-white rounded-xl shadow-sm p-4">
+        <div class="saved-gift-card bg-white rounded-xl shadow-sm p-4">
           <div class="flex items-start justify-between gap-2">
             <div class="flex-1">
               <h3 class="font-medium text-gray-900">${s.gift_name}</h3>
@@ -274,6 +274,20 @@ function renderSavedList() {
     </div>`;
 
   sendButtons.style.display = 'flex';
+
+  container.querySelectorAll('.saved-gift-card').forEach((card, index) => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('[data-action]')) return;
+      const sel = state.savedSelections[index];
+      openGiftModal({
+        name: sel.gift_name,
+        description: sel.description,
+        image_path: sel.image_path,
+        price: sel.price,
+        links: sel.links
+      });
+    });
+  });
 }
 
 function gotoWelcomeScreen() {

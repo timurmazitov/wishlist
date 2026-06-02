@@ -27,13 +27,15 @@ body {
   z-index: 10;
 }
 
-.gift-card {
+.gift-card,
+.saved-gift-card {
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.gift-card:active {
+.gift-card:active,
+.saved-gift-card:active {
   transform: scale(0.98);
 }
 
