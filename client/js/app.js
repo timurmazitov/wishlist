@@ -38,7 +38,7 @@ function showScreen(name) {
   const footer = $('#app-footer');
   const footerGifts = $('#footer-gifts');
 
-  if (name === 'guest') {
+  if (name === 'welcome' || name === 'guest') {
     footer.style.display = 'none';
     footerGifts.style.display = 'none';
   } else if (name === 'gifts') {
@@ -276,6 +276,10 @@ function renderSavedList() {
   sendButtons.style.display = 'flex';
 }
 
+function gotoWelcomeScreen() {
+  showScreen('welcome');
+}
+
 async function gotoGuestScreen() {
   state.guestId = null;
   state.guestName = null;
@@ -419,7 +423,7 @@ async function init() {
   document.addEventListener('click', async (e) => {
     const restartBtn = e.target.closest('[data-action="restart"]');
     if (restartBtn) {
-      await gotoGuestScreen();
+      gotoWelcomeScreen();
     }
   });
 
