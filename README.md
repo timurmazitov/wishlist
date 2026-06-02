@@ -22,8 +22,6 @@ wishlist/
 │   ├── routes/
 │   │   ├── gifts.js         # GET /api/gifts
 │   │   ├── selections.js    # CRUD /api/selections
-│   │   └── services/
-│   │       └── mailer.js    # Nodemailer
 │   └── package.json
 ├── client/                  # Статический фронтенд
 │   ├── index.html           # 3 экрана (Tailwind CSS CDN)
@@ -44,4 +42,3 @@ wishlist/
 | POST    | `/api/selections`             | Сохранить выбор                 |
 | GET     | `/api/selections?guest_id=X`  | Выборы гостя                    |
 | DELETE  | `/api/selections?guest_id=X`  | Очистить выборы гостя           |
-| POST    | `/api/send-email`             | Отправить список на email       |

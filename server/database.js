@@ -26,7 +26,6 @@ function initDb() {
     CREATE TABLE IF NOT EXISTS guests (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT UNIQUE NOT NULL,
-      email TEXT,
       phone TEXT
     )
   `);
@@ -62,11 +61,11 @@ function initDb() {
 function seedData(database) {
   const guestCount = database.prepare('SELECT COUNT(*) as count FROM guests').get();
   if (guestCount.count === 0) {
-    const insertGuest = database.prepare('INSERT INTO guests (name, email) VALUES (?, ?)');
-    insertGuest.run('Анна', 'anna@example.com');
-    insertGuest.run('Михаил', 'mikhail@example.com');
-    insertGuest.run('Елена', null);
-    insertGuest.run('Дмитрий', 'dmitry@example.com');
+    const insertGuest = database.prepare('INSERT INTO guests (name) VALUES (?)');
+    insertGuest.run('Анна');
+    insertGuest.run('Михаил');
+    insertGuest.run('Елена');
+    insertGuest.run('Дмитрий');
   }
 
   const giftCount = database.prepare('SELECT COUNT(*) as count FROM gifts').get();

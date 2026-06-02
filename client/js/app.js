@@ -379,26 +379,6 @@ async function clearAllSelections() {
   updateSummary();
 }
 
-async function sendEmail() {
-  if (!state.guestId) return;
-  try {
-    const res = await fetch(`${API_BASE}/send-email`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ guest_id: state.guestId })
-    });
-    const data = await res.json();
-    if (res.ok) {
-      alert('Email отправлен!');
-    } else {
-      alert(`Ошибка: ${data.error}`);
-    }
-  } catch (err) {
-    console.error('Failed to send email:', err);
-    alert('Не удалось отправить email');
-  }
-}
-
 async function init() {
   $('#btn-start').addEventListener('click', () => {
     showScreen('rules');
