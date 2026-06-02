@@ -33,7 +33,7 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 function showScreen(name) {
   $$('.screen').forEach((el) => (el.style.display = 'none'));
-  $(`#screen-${name}`).style.display = 'block';
+  $(`#screen-${name}`).style.display = '';
 
   const footer = $('#app-footer');
   const footerGifts = $('#footer-gifts');
@@ -268,7 +268,7 @@ function renderSavedList() {
         )
         .join('')}
       <div class="bg-primary-pale rounded-xl p-4 text-center shadow-sm">
-        <span class="text-sm text-sage-300">Итого:</span>
+        <span class="text-xl text-sage-300">Итого:</span>
         <span class="text-lg font-bold text-primary ml-2">${totalPrice} ₽</span>
       </div>
     </div>`;

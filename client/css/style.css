@@ -14,7 +14,6 @@ body {
 }
 
 .screen {
-  display: block;
 }
 
 #app-footer {
@@ -125,6 +124,7 @@ input, select, textarea {
 .guest-list-item.selected {
   background-color: #C5D9C5;
 }
+
 
 @media (max-width: 360px) {
   html {
