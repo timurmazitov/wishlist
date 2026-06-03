@@ -264,6 +264,12 @@ function renderSavedList() {
             </div>
             <span class="bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-sm">${s.quantity}</span>
           </div>
+          ${s.links && s.links.length > 0 ? `
+          <div class="mt-3 pt-3 border-t border-gray-100">
+            <p class="text-xs text-sage-300 mb-2">Купить:</p>
+            ${s.links.map((link) => `<a href="${link.url}" target="_blank" rel="noopener" class="modal-link">${link.title}</a>`).join('')}
+          </div>
+          ` : ''}
         </div>`
         )
         .join('')}
@@ -277,7 +283,7 @@ function renderSavedList() {
 
   container.querySelectorAll('.saved-gift-card').forEach((card, index) => {
     card.addEventListener('click', (e) => {
-      if (e.target.closest('[data-action]')) return;
+      if (e.target.closest('[data-action]') || e.target.closest('a')) return;
       const sel = state.savedSelections[index];
       openGiftModal({
         name: sel.gift_name,
